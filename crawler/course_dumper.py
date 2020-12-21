@@ -5,7 +5,7 @@ import re
 FETCH = True
 
 YEAR = 109
-SEMESTER = 1
+SEMESTER = 2
 
 if FETCH:
     data = requests.post("https://timetable.nctu.edu.tw/?r=main/get_cos_list",
@@ -36,15 +36,42 @@ data = json.load(open("origin.json"))
 
 course_data = {}
 # missing_dep = []
-types = {'選修': 0, '必修': 1, '通識': 2, '體育': 3, '軍訓': 4, '外語': 5}
+types = {'選修': 0, '必修': 1, '通識': 2, '體育': 3, '軍訓': 4, '外語': 5, '輔系': 6, '教育': 7}
 
 
 def parse_time(time_code):
-    time_list = re.findall("[1-7][A-Z]+", time_code)
+    week_dict = {
+        'M': '1',
+        'T': '2',
+        'W': '3',
+        'R': '4',
+        'F': '5',
+        'S': '6',
+        'U': '7'
+    }
+    class_dict = {
+        'y': 'M',
+        'z': 'N',
+        '1': 'A',
+        '2': 'B',
+        '3': 'C',
+        '4': 'D',
+        'n': 'X',
+        '5': 'E',
+        '6': 'F',
+        '7': 'G',
+        '8': 'H',
+        '9': 'Y',
+        'a': 'I',
+        'b': 'J',
+        'c': 'K',
+        'd': 'L'
+    }
+    time_list = re.findall("[MTWRFSU][1-9yznabcd]+", time_code)
     result = []
     for code in time_list:
         for char in code[1:]:
-            result.append(f"{code[0]}{char}")
+            result.append(f"{week_dict[code[0]]}{class_dict[char]}")
    
     return result
 

@@ -25,7 +25,7 @@ const BERIEF_CODE = {
   'A504': '跨院',
   'A505': '校基本'
 }
-const YEAR = '109', SEMESTER = '1';
+const YEAR = '109', SEMESTER = '2';
 const APP_URL = `${location.protocol}//${location.host}${location.pathname}`;
 
 const DEV = location.hostname === '127.0.0.1';

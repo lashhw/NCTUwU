@@ -2,7 +2,7 @@ import json
 import requests
 
 YEAR = 109
-SEMESTER = 1
+SEMESTER = 2
 ACYSEM = f"{YEAR}{SEMESTER}"
 
 types = {
